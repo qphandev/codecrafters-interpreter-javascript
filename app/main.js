@@ -64,14 +64,6 @@ if (fileContent.length !== 0) {
       case ';':
         console.log('SEMICOLON ; null');
         break;
-      case '$':
-        console.error(`[line ${lineCounter}] Error: Unexpected character: $`);
-        isError65 = true;
-        break;
-      case '#':
-        console.error(`[line ${lineCounter}] Error: Unexpected character: #`);
-        isError65 = true;
-        break;
       case '\n':
         ++lineCounter;
         break;
