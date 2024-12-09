@@ -76,6 +76,7 @@ if (fileContent.length !== 0) {
         ++lineCounter;
         break;
       default:
+        console.error(`[line ${lineCounter}] Error: Unexpected character: ${c}`);
         isError65 = true;
     }
     ++i;
