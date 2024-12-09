@@ -24,11 +24,16 @@ const filename = args[1];
 const fileContent = fs.readFileSync(filename, "utf8");
 
 if (fileContent.length !== 0) {
+
+  // Exit 65
+  let isError65 = false;
+
+  let lineCounter = 1;
   // break apart 
   let i = 0;
   while (i < fileContent.length) {
     const c = fileContent[i];
-    switch(c) {
+    switch (c) {
       case '(':
         console.log('LEFT_PAREN ( null');
         break;
@@ -59,13 +64,29 @@ if (fileContent.length !== 0) {
       case ';':
         console.log('SEMICOLON ; null');
         break;
+      case '$':
+        console.error(`[line ${lineCounter}] Error: Unexpected character: $`);
+        isError65 = true;
+        break;
+      case '#':
+        console.error(`[line ${lineCounter}] Error: Unexpected character: #`);
+        isError65 = true;
+        break;
+      case '\n':
+        ++lineCounter;
+        break;
       default:
         console.log('not handled');
     }
     ++i;
   }
   console.log("EOF  null");
+
+  if (isError65) {
+    process.exit(65);
+  }
 }
 else {
   console.log("EOF  null");
 }
+
