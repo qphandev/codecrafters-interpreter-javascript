@@ -53,8 +53,8 @@ if (fileContent.length !== 0) {
       case '+':
         console.log('PLUS + null');
         break;
-      case '*':
-        console.log('STAR * null');
+      case '-':
+        console.log('MINUS - null');
         break;
       default:
         console.log('not handled');
