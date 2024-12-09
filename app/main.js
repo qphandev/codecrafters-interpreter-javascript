@@ -56,6 +56,9 @@ if (fileContent.length !== 0) {
       case '-':
         console.log('MINUS - null');
         break;
+      case ';':
+        console.log('SEMICOLON ; null');
+        break;
       default:
         console.log('not handled');
     }
