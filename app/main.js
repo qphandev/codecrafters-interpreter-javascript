@@ -76,7 +76,7 @@ if (fileContent.length !== 0) {
         ++lineCounter;
         break;
       default:
-        console.log('not handled');
+        isError65 = true;
     }
     ++i;
   }
@@ -89,4 +89,3 @@ if (fileContent.length !== 0) {
 else {
   console.log("EOF  null");
 }
-
