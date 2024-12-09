@@ -35,6 +35,12 @@ if (fileContent.length !== 0) {
       case ')':
         console.log('RIGHT_PAREN ) null');
         break;
+      case '{':
+        console.log('LEFT_BRACE { null');
+        break;
+      case '}':
+        console.log('RIGHT_BRACE } null');
+        break;
       default:
         console.log('not handled');
     }
