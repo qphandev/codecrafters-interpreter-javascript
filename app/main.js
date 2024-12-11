@@ -78,10 +78,9 @@ let start = 0;
 let current = 0;
 let line = 1;
 
-function scanToken(character) {
-  // Exit 65
-  let isError65 = false;
+let isError65 = false;
 
+function scanToken(character) {
   switch (character) {
     case '(':
       console.log('LEFT_PAREN ( null');
@@ -125,10 +124,6 @@ function scanToken(character) {
   }
 
   tokens.push(TokenType.EOF);
-
-  if (isError65) {
-    process.exit(65);
-  }
 }
 
 // HELPERS
@@ -158,6 +153,10 @@ if (fileContent.length !== 0) {
     scanToken(character);
   }
   console.log("EOF  null");
+
+  if (isError65) {
+    process.exit(65);
+  }
 }
 else {
   console.log("EOF  null");
