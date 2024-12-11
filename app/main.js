@@ -120,7 +120,7 @@ function scanToken(character) {
       ++line;
       break;
     default:
-      console.error(`[line ${line}] Error: Unexpected character: ${c}`);
+      console.error(`[line ${line}] Error: Unexpected character: ${character}`);
       isError65 = true;
   }
 
