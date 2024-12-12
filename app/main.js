@@ -122,7 +122,7 @@ function scanToken(character) {
       peekAndMatch('=') ? console.log('LESS_EQUAL <= null') : console.log('LESS < null');
       break;
     case '>':
-      peekAndMatch('=') ? console.log('GREATER_EQUAL >=') : console.log('GREATER > null');
+      peekAndMatch('=') ? console.log('GREATER_EQUAL >= null') : console.log('GREATER > null');
       break;
     case '\n':
       ++line;
