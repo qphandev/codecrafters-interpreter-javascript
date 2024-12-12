@@ -118,6 +118,12 @@ function scanToken(character) {
     case '!':
       peekAndMatch('=') ? console.log('BANG_EQUAL != null') : console.log('BANG ! null');
       break;
+    case '<':
+      peekAndMatch('=') ? console.log('LESS_EQUAL <= null') : console.log('LESS < null');
+      break;
+    case '>':
+      peekAndMatch('=') ? console.log('GREATER_EQUAL >=') : console.log('GREATER > null');
+      break;
     case '\n':
       ++line;
       break;
