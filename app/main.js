@@ -115,6 +115,9 @@ function scanToken(character) {
     case '=':
       peekAndMatch('=') ? console.log('EQUAL_EQUAL == null') : console.log('EQUAL = null');
       break;
+    case '!':
+      peekAndMatch('=') ? console.log('BANG_EQUAL != null') : console.log('BANG ! null');
+      break;
     case '\n':
       ++line;
       break;
@@ -149,7 +152,7 @@ if (fileContent.length !== 0) {
   while (!isAtEnd()) {
     start = current;
     const character = advance();
-    
+
     scanToken(character);
   }
   console.log("EOF  null");
