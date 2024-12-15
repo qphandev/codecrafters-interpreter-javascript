@@ -134,6 +134,11 @@ function scanToken(character) {
         console.log('SLASH / null');
       }
       break;
+    case ' ':
+    case '\r':
+    case '\t':
+      // Ignore whitespace.
+      break;
     case '\n':
       columnNumber = 0;
       ++line;
