@@ -77,8 +77,9 @@ const tokens = [];
 let start = 0;
 let current = 0;
 let line = 1;
+let columnNumber = 0;
 
-let isError65 = false;
+let hadError = false;
 
 function scanToken(character) {
   switch (character) {
@@ -113,23 +114,33 @@ function scanToken(character) {
       console.log('SEMICOLON ; null');
       break;
     case '=':
-      peekAndMatch('=') ? console.log('EQUAL_EQUAL == null') : console.log('EQUAL = null');
+      match('=') ? console.log('EQUAL_EQUAL == null') : console.log('EQUAL = null');
       break;
     case '!':
-      peekAndMatch('=') ? console.log('BANG_EQUAL != null') : console.log('BANG ! null');
+      match('=') ? console.log('BANG_EQUAL != null') : console.log('BANG ! null');
       break;
     case '<':
-      peekAndMatch('=') ? console.log('LESS_EQUAL <= null') : console.log('LESS < null');
+      match('=') ? console.log('LESS_EQUAL <= null') : console.log('LESS < null');
       break;
     case '>':
-      peekAndMatch('=') ? console.log('GREATER_EQUAL >= null') : console.log('GREATER > null');
+      match('=') ? console.log('GREATER_EQUAL >= null') : console.log('GREATER > null');
+      break;
+    case '/':
+      if (match('/')) {
+        while ((peek() !== '\n') && !isAtEnd()) { // peek without consuming the character, !match('\n') && !isAtEnd() would've worked as well
+          advance();
+        }
+      } else {
+        console.log('SLASH / null');
+      }
       break;
     case '\n':
+      columnNumber = 0;
       ++line;
       break;
     default:
-      console.error(`[line ${line}] Error: Unexpected character: ${character}`);
-      isError65 = true;
+      console.error(`[line ${line}]:[columnNumber: ${columnNumber}] Error: Unexpected character: ${character}`);
+      error(line, `Unexpected character: ${character}`);
   }
 
   tokens.push(TokenType.EOF);
@@ -144,12 +155,36 @@ function advance() {
   return fileContent[current++];
 }
 
-function peekAndMatch(expected) {
+/**
+ * Checks if the current character in the file content matches the expected character.
+ * 
+ * @param {string} expected - The character to match against the current character in the file content.
+ * @return {boolean} - Returns true if the current character matches the expected character and advances the current position, otherwise returns false.
+ */
+function match(expected) {
   if (isAtEnd()) return false;
   if (fileContent[current] !== expected) return false;
 
   ++current;
   return true;
+}
+
+/**
+ * 
+ * @returns {string} - Returns the current character in the file content.
+ */
+function peek() {
+  if (isAtEnd()) return '\0';
+  return fileContent[current];
+}
+
+function error(line, columnNumber, message) {
+  report(line, columnNumber, "", message);
+}
+
+function report(line, columnNumber, where, message) {
+  console.error(`[line ${line}] Error ${where}: ${message}`);
+  hadError = true;
 }
 
 // BEGIN READING FILE
@@ -163,7 +198,7 @@ if (fileContent.length !== 0) {
   }
   console.log("EOF  null");
 
-  if (isError65) {
+  if (hadError) {
     process.exit(65);
   }
 }
