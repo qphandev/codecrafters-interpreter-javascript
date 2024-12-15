@@ -139,7 +139,7 @@ function scanToken(character) {
       ++line;
       break;
     default:
-      console.error(`[line ${line}]:[columnNumber: ${columnNumber}] Error: Unexpected character: ${character}`);
+      console.error(`[line ${line}] Error: Unexpected character: ${character}`);
       error(line, `Unexpected character: ${character}`);
   }
 
