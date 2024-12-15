@@ -139,8 +139,8 @@ function scanToken(character) {
       ++line;
       break;
     default:
-      console.error(`[line ${line}] Error: Unexpected character: ${character}`);
-      error(line, `Unexpected character: ${character}`);
+      // console.error(`[line ${line}] Error: Unexpected character: ${character}`);
+      error(line, undefined, `Unexpected character: ${character}`);
   }
 
   tokens.push(TokenType.EOF);
@@ -183,7 +183,7 @@ function error(line, columnNumber, message) {
 }
 
 function report(line, columnNumber, where, message) {
-  console.error(`[line ${line}] Error ${where}: ${message}`);
+  console.error(`[line ${line}] Error: ${message}`);
   hadError = true;
 }
 
