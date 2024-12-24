@@ -25,52 +25,52 @@ const fileContent = fs.readFileSync(filename, "utf8");
 
 const TokenType = {
   // Single-character tokens.
-  LEFT_PAREN: { name: "LEFT_PAREN", lexeme: "(" },
-  RIGHT_PAREN: { name: "RIGHT_PAREN", lexeme: ")" },
-  LEFT_BRACE: { name: "LEFT_BRACE", lexeme: "{" },
-  RIGHT_BRACE: { name: "RIGHT_BRACE", lexeme: "}" },
-  COMMA: { name: "COMMA", lexeme: "," },
-  DOT: { name: "DOT", lexeme: "." },
-  MINUS: { name: "MINUS", lexeme: "-" },
-  PLUS: { name: "PLUS", lexeme: "+" },
-  SEMICOLON: { name: "SEMICOLON", lexeme: ";" },
-  SLASH: { name: "SLASH", lexeme: "/" },
-  STAR: { name: "STAR", lexeme: "*" },
+  LEFT_PAREN: "LEFT_PAREN",
+  RIGHT_PAREN: "RIGHT_PAREN",
+  LEFT_BRACE: "LEFT_BRACE",
+  RIGHT_BRACE: "RIGHT_BRACE",
+  COMMA: "COMMA",
+  DOT: "DOT",
+  MINUS: "MINUS",
+  PLUS: "PLUS",
+  SEMICOLON: "SEMICOLON",
+  SLASH: "SLASH",
+  STAR: "STAR",
 
   // One or two character tokens.
-  BANG: { name: "BANG", lexeme: "!" },
-  BANG_EQUAL: { name: "BANG_EQUAL", lexeme: "!=" },
-  EQUAL: { name: "EQUAL", lexeme: "=" },
-  EQUAL_EQUAL: { name: "EQUAL_EQUAL", lexeme: "==" },
-  GREATER: { name: "GREATER", lexeme: ">" },
-  GREATER_EQUAL: { name: "GREATER_EQUAL", lexeme: ">=" },
-  LESS: { name: "LESS", lexeme: "<" },
-  LESS_EQUAL: { name: "LESS_EQUAL", lexeme: "<=" },
+  BANG: "BANG",
+  BANG_EQUAL: "BANG_EQUAL",
+  EQUAL: "EQUAL",
+  EQUAL_EQUAL: "EQUAL_EQUAL",
+  GREATER: "GREATER",
+  GREATER_EQUAL: "GREATER_EQUAL",
+  LESS: "LESS",
+  LESS_EQUAL: "LESS_EQUAL",
 
   // Literals.
-  IDENTIFIER: { name: "IDENTIFIER", lexeme: "" },
-  STRING: { name: "STRING", lexeme: "" },
-  NUMBER: { name: "NUMBER", lexeme: "" },
+  IDENTIFIER: "IDENTIFIER",
+  STRING: "STRING",
+  NUMBER: "NUMBER",
 
   // Keywords.
-  AND: { name: "AND", lexeme: "and" },
-  CLASS: { name: "CLASS", lexeme: "class" },
-  ELSE: { name: "ELSE", lexeme: "else" },
-  FALSE: { name: "FALSE", lexeme: "false" },
-  FUN: { name: "FUN", lexeme: "fun" },
-  FOR: { name: "FOR", lexeme: "for" },
-  IF: { name: "IF", lexeme: "if" },
-  NIL: { name: "NIL", lexeme: "nil" },
-  OR: { name: "OR", lexeme: "or" },
-  PRINT: { name: "PRINT", lexeme: "print" },
-  RETURN: { name: "RETURN", lexeme: "return" },
-  SUPER: { name: "SUPER", lexeme: "super" },
-  THIS: { name: "THIS", lexeme: "this" },
-  TRUE: { name: "TRUE", lexeme: "true" },
-  VAR: { name: "VAR", lexeme: "var" },
-  WHILE: { name: "WHILE", lexeme: "while" },
+  AND: "AND",
+  CLASS: "CLASS",
+  ELSE: "ELSE",
+  FALSE: "FALSE",
+  FUN: "FUN",
+  FOR: "FOR",
+  IF: "IF",
+  NIL: "NIL",
+  OR: "OR",
+  PRINT: "PRINT",
+  RETURN: "RETURN",
+  SUPER: "SUPER",
+  THIS: "THIS",
+  TRUE: "TRUE",
+  VAR: "VAR",
+  WHILE: "WHILE",
 
-  EOF: { name: "EOF", lexeme: "" }
+  EOF: "EOF"
 };
 
 const tokens = [];
@@ -84,46 +84,46 @@ let hadError = false;
 function scanToken(character) {
   switch (character) {
     case '(':
-      console.log('LEFT_PAREN ( null');
+      addToken(TokenType.LEFT_PAREN)
       break;
     case ')':
-      console.log('RIGHT_PAREN ) null');
+      addToken(TokenType.RIGHT_PAREN)
       break;
     case '{':
-      console.log('LEFT_BRACE { null');
+      addToken(TokenType.LEFT_BRACE)
       break;
     case '}':
-      console.log('RIGHT_BRACE } null');
+      addToken(TokenType.RIGHT_BRACE)
       break;
     case '*':
-      console.log('STAR * null');
+      addToken(TokenType.STAR)
       break;
     case '.':
-      console.log('DOT . null');
+      addToken(TokenType.DOT)
       break;
     case ',':
-      console.log('COMMA , null');
+      addToken(TokenType.COMMA)
       break;
     case '+':
-      console.log('PLUS + null');
+      addToken(TokenType.PLUS)
       break;
     case '-':
-      console.log('MINUS - null');
+      addToken(TokenType.MINUS)
       break;
     case ';':
-      console.log('SEMICOLON ; null');
+      addToken(TokenType.SEMICOLON)
       break;
     case '=':
-      match('=') ? console.log('EQUAL_EQUAL == null') : console.log('EQUAL = null');
+      match('=') ? addToken(TokenType.EQUAL_EQUAL) : addToken(TokenType.EQUAL);
       break;
     case '!':
-      match('=') ? console.log('BANG_EQUAL != null') : console.log('BANG ! null');
+      match('=') ? addToken(okenType.BANG_EQUAL) : addToken(TokenType.BANG);
       break;
     case '<':
-      match('=') ? console.log('LESS_EQUAL <= null') : console.log('LESS < null');
+      match('=') ? addToken(TokenType.LESS_EQUAL) : addToken(TokenType.LESS);
       break;
     case '>':
-      match('=') ? console.log('GREATER_EQUAL >= null') : console.log('GREATER > null');
+      match('=') ? addToken(TokenType.GREATER_EQUAL) : addToken(TokenType.GREATER);
       break;
     case '/':
       if (match('/')) {
@@ -131,7 +131,7 @@ function scanToken(character) {
           advance();
         }
       } else {
-        console.log('SLASH / null');
+        addToken(TokenType.SLASH)
       }
       break;
     case ' ':
@@ -139,16 +139,44 @@ function scanToken(character) {
     case '\t':
       // Ignore whitespace.
       break;
+    case '"':
+      string();
+      break
     case '\n':
       columnNumber = 0;
       ++line;
       break;
     default:
-      // console.error(`[line ${line}] Error: Unexpected character: ${character}`);
       error(line, undefined, `Unexpected character: ${character}`);
   }
+}
 
-  tokens.push(TokenType.EOF);
+// TOKEN FACTORY
+function createToken(type, lexeme, literal, lineNumber) {
+  return {
+    type,
+    lexeme,
+    literal,
+    line: lineNumber,
+    toString: function () {
+      return `${type} ${lexeme} ${literal}`
+    }
+  }
+}
+
+// js doesn't do method overloading :(
+// function addToken(type) {
+//   addToken(tokenType, null)
+// }
+
+// function addToken(type, literal) {
+//   const text = fileContent.substring(start, current)
+//   tokens.push(createToken(type, text, literal, line))
+// }
+function addToken(type, literal = null) {
+  // in another language, this could be done with method overloading addToken...
+  let lexeme = literal ? fileContent.substring(start, current) : "";
+  tokens.push(createToken(type, lexeme, literal, line))
 }
 
 // HELPERS
@@ -160,6 +188,30 @@ function advance() {
   return fileContent[current++];
 }
 
+function string() {
+
+  // while we're inside of quotations
+  while (peek() !== '"' && !isAtEnd()) {
+    if (peek() === '\n') {
+      line++;
+    }
+    advance();
+  }
+
+  // quotation terminates early (reached eof)
+  if (isAtEnd()) {
+    error(line, undefined, 'Unterminated string.');
+    return;
+  }
+
+  // consumes closing double quotes
+  advance();
+
+  // extracts content inside of quotations
+  const value = fileContent.substring(start + 1, current - 1);
+  addToken(TokenType.STRING, value);
+
+}
 /**
  * Checks if the current character in the file content matches the expected character.
  * 
@@ -201,12 +253,14 @@ if (fileContent.length !== 0) {
 
     scanToken(character);
   }
-  console.log("EOF  null");
-
   if (hadError) {
     process.exit(65);
   }
+
+  addToken(TokenType.EOF);
 }
 else {
-  console.log("EOF  null");
+  addToken(TokenType.EOF);
 }
+
+tokens.forEach(token => console.log(token.toString()))
