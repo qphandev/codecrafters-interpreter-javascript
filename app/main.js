@@ -175,8 +175,8 @@ function createToken(type, lexeme, literal, lineNumber) {
 // }
 function addToken(type, literal = null) {
   // in another language, this could be done with method overloading addToken...
-  const lexeme = literal ? fileContent.substring(start, current) : "";
-  tokens.push(createToken(type, lexeme, literal, line))
+  const lexeme = fileContent.substring(start, current);
+  tokens.push(createToken(type, lexeme, literal, line));
 }
 
 // HELPERS
@@ -200,6 +200,7 @@ function string() {
 
   // quotation terminates early (reached eof)
   if (isAtEnd()) {
+    start = current;
     error(line, undefined, 'Unterminated string.');
     return;
   }
