@@ -254,6 +254,8 @@ if (fileContent.length !== 0) {
 
     scanToken(character);
   }
+
+  start = current;
   addToken(TokenType.EOF);
 }
 else {
