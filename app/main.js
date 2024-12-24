@@ -117,7 +117,7 @@ function scanToken(character) {
       match('=') ? addToken(TokenType.EQUAL_EQUAL) : addToken(TokenType.EQUAL);
       break;
     case '!':
-      match('=') ? addToken(okenType.BANG_EQUAL) : addToken(TokenType.BANG);
+      match('=') ? addToken(TokenType.BANG_EQUAL) : addToken(TokenType.BANG);
       break;
     case '<':
       match('=') ? addToken(TokenType.LESS_EQUAL) : addToken(TokenType.LESS);
@@ -175,7 +175,7 @@ function createToken(type, lexeme, literal, lineNumber) {
 // }
 function addToken(type, literal = null) {
   // in another language, this could be done with method overloading addToken...
-  let lexeme = literal ? fileContent.substring(start, current) : "";
+  const lexeme = literal ? fileContent.substring(start, current) : "";
   tokens.push(createToken(type, lexeme, literal, line))
 }
 
@@ -253,14 +253,14 @@ if (fileContent.length !== 0) {
 
     scanToken(character);
   }
-  if (hadError) {
-    process.exit(65);
-  }
-
   addToken(TokenType.EOF);
 }
 else {
   addToken(TokenType.EOF);
 }
 
-tokens.forEach(token => console.log(token.toString()))
+tokens.forEach(token => console.log(token.toString()));
+
+if (hadError) {
+  process.exit(65);
+}
