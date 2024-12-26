@@ -147,7 +147,12 @@ function scanToken(character) {
       ++line;
       break;
     default:
-      error(line, undefined, `Unexpected character: ${character}`);
+      if (isDigit(character)) {
+        number();
+      } else {
+        error(line, undefined, `Unexpected character: ${character}`);
+      }
+      break;
   }
 }
 
@@ -213,6 +218,24 @@ function string() {
   addToken(TokenType.STRING, value);
 
 }
+
+function number() {
+  while (isDigit(peek())) advance(); // consumes number
+
+  // Look for fractional part
+  if (peek() === '.' && isDigit(peekNext())) {
+    // consume "." 
+    advance();
+
+    while (isDigit(peek())) advance();
+  }
+  addToken(TokenType.NUMBER, parseFloat(fileContent.substring(start, current)))
+}
+
+function isDigit(c) {
+  return '0' <= c && c <= '9';
+}
+
 /**
  * Checks if the current character in the file content matches the expected character.
  * 
@@ -234,6 +257,11 @@ function match(expected) {
 function peek() {
   if (isAtEnd()) return '\0';
   return fileContent[current];
+}
+
+function peekNext() {
+  if (current + 1 >= fileContent.length) return '\0';
+  return fileContent[++current]
 }
 
 function error(line, columnNumber, message) {
