@@ -164,7 +164,7 @@ function createToken(type, lexeme, literal, lineNumber) {
     literal,
     line: lineNumber,
     toString: function () {
-      return `${type} ${lexeme} ${literal}`
+      return `${type} ${lexeme} ${Number.isInteger(literal) ? literal + '.0' : literal}`
     }
   }
 }
@@ -228,8 +228,9 @@ function number() {
     advance();
 
     while (isDigit(peek())) advance();
-  }
-  addToken(TokenType.NUMBER, parseFloat(fileContent.substring(start, current)))
+  } 
+
+  addToken(TokenType.NUMBER, parseFloat(fileContent.substring(start, current)));
 }
 
 function isDigit(c) {
